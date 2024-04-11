@@ -87,19 +87,10 @@ jobs:
 
           # Compile kernel.
           ./compile.sh RELEASE=jammy JUST_KERNEL=yes BUILD_ONLY=u-boot,kernel,armbian-config,armbian-bsp BOARD="$BOARD_NAME" BRANCH="$BRANCH" KERNEL_CONFIGURE=no BUILD_MINIMAL=yes
-
-      - name: Extract Output
-        id: output
-        run: |
-          cd build/output/debs/
-          fname=$(ls --format single-column linux-* | head -n 1)
-          fpath=$(realpath ${fname})
-          echo "FILE_DISPLAY_NAME=${fname}" >> $GITHUB_OUTPUT
-          echo "FILEPATH=${fpath}" >> $GITHUB_OUTPUT
       
       - name: Upload images artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ steps.output.outputs.FILE_DISPLAY_NAME }}
-          path: ${{ steps.output.outputs.FILEPATH }}
+          name: "$BRANCH"
+          path: build/output/debs/
           
