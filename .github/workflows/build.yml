@@ -92,7 +92,7 @@ jobs:
         id: output
         run: |
           cd build/output/debs/
-          fname=$(ls --format single-column kernel-*.tar | head -n 1)
+          fname=$(ls --format single-column linux-* | head -n 1)
           fpath=$(realpath ${fname})
           echo "FILE_DISPLAY_NAME=${fname}" >> $GITHUB_OUTPUT
           echo "FILEPATH=${fpath}" >> $GITHUB_OUTPUT
